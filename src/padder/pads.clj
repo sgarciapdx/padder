@@ -1,10 +1,14 @@
 (ns padder.pads)
 
+(defn- makepad [size pad]
+  (apply str (repeat size pad)))
+
 (defn leftpad [string size pad]
-  (str (apply str (repeat size pad)) string))
+  (str (makepad size pad) string))
 
 (defn rightpad [string size pad]
-  (str string (apply str (repeat size pad))))
+  (str string (makepad size pad)))
 
 (defn centerpad [string size pad]
-  (leftpad (rightpad string size pad) size pad))
+  (let [x (makepad size pad)]
+    (str x string x)))
